@@ -1,154 +1,82 @@
-# Projet DS2 — Orchestrateur Multi-Agents | Tourisme Tunisien
+# Orchestration multi-agents sécurisée pour le tourisme tunisien
 
-## Description
+Système multi-agents (Planner, Executor, Critic) qui orchestre des outils pour des
+workflows liés au **tourisme en Tunisie**, avec planification par backtracking et
+programmation dynamique, injection de pannes, tests de concurrence et interface graphique.
 
-Ce projet implémente un système d'orchestration multi-agents pour analyser
-les indicateurs du secteur touristique tunisien (taux d'occupation, RevPAR,
-arrivées par gouvernorat, indicateurs saisonniers).
+Projet réalisé en groupe de 4 étudiants — Problem Solving, ISG Tunis (2BIS), 2025-2026.
 
-### Ce que le projet implémente
+## Secteur : tourisme
+[À COMPLÉTER : ex. taux d'occupation hôtelier par gouvernorat, arrivées de visiteurs,
+saisonnalité, tout ce que tes données synthétiques contiennent vraiment]
 
-- **3 agents distincts** : Planner, ExecutorAgent, CriticAgent
-- **Boucle d'orchestration** : Plan → Act → Observe → Critique avec journal persisté par run
-- **Backtracking** avec élagage (depth ≥ max_steps)
-- **Dynamic Programming** avec cache MD5 et comparaison empirique BT vs DP
-- **Injection de pannes** : fichier manquant, HTTP 429 avec retry borné (tenacity)
-- **Concurrence** : runs parallèles avec journaux et caches isolés par run_id
-- **Logs structurés** via structlog (JSON par événement)
-- **GUI Streamlit** : lanceur, timeline, métriques BT vs DP, injection de pannes
+## Architecture
+- **Planner** : propose la prochaine action et choisit l'outil
+- **Executor** : exécute les outils, valide les entrées et sorties (schémas stricts)
+- **Critic** : vérifie la correction et le respect des règles de sécurité
+- Boucle : Plan → Act → Observe → Critique, avec nombre d'étapes et de tentatives bornés
 
----
+## Scénarios
+1. **Tableau de bord opérationnel** à partir d'un fichier local synthétique
+   (lecture, calcul des KPI, rapport JSON) + variante avec panne injectée
+2. **Indicateurs touristiques** via API autorisée ou serveur simulé
+   (GET, validation de schéma, transformation) + variante HTTP 429 / timeout
 
-## Installation
+## Algorithmes
+- **Backtracking** : état = [À COMPLÉTER], règles d'élagage = [À COMPLÉTER]
+- **Programmation dynamique / mémoïsation** : clé de cache = [À COMPLÉTER]
+- Comparaison des deux approches (même simulateur, mêmes graines et budgets)
 
+## Sécurité et fiabilité
+- Liste blanche de ressources et d'hôtes, validation stricte des schémas
+- Masquage des secrets dans les logs et l'interface
+- Réessais bornés, arrêt sûr en cas d'échec, journaux d'exécution par run
+- Isolation entre exécutions parallèles (pas d'état partagé modifiable)
+
+## Résultats
+[À COMPLÉTER avec tes vrais chiffres]
+| Métrique | Valeur |
+|----------|--------|
+| Taux de réussite des tâches | |
+| Score de grounding des outils | |
+| Récupération sur pannes injectées | |
+| Gain du cache DP (taux de succès du cache / latence) | |
+| Test de concurrence | |
+
+## Interface graphique
+[À COMPLÉTER : Streamlit / Gradio / FastAPI / autre]
+Vues : lanceur de tâches, liste des runs, chronologie, inspecteur d'appels d'outils,
+panneau de sécurité, métriques.
+
+![Trace](screenshots/trace.png)
+![Métriques](screenshots/metrics.png)
+
+## Installation et lancement
 ```bash
-# 1. Se placer dans le dossier du projet
-cd Groupe_X_Projet_DS2
-
-# 2. (Recommandé) Créer un environnement virtuel
-python -m venv venv
-source venv/bin/activate        # Linux / macOS
-venv\Scripts\activate           # Windows
-
-# 3. Installer les dépendances
+git clone https://github.com/kghada360-bit/NOM-DU-DEPOT.git
+cd NOM-DU-DEPOT
+python -m venv .venv
+.venv\Scripts\activate        # Windows
 pip install -r requirements.txt
+pytest                        # lancer les tests
+[COMMANDE POUR LANCER LA GUI]  # URL et port : [À COMPLÉTER]
 ```
 
----
-
-## Lancement de la GUI
-
-```bash
-streamlit run tourism_dashboard.py
+## Structure
+```
+orchestrator/   agents et gestionnaire de runs
+tools/          définitions d'outils + validation de schémas
+workflows/      scénarios du tourisme
+security/       listes blanches, validation, masquage
+gui/            interface graphique
+tests/          tests unitaires, pannes injectées, concurrence
+docs/           conception, décisions, limites
+data_synthetic/ données synthétiques
 ```
 
-La GUI s'ouvre sur **http://localhost:8501**
+## Limites
+[À COMPLÉTER : ce qui ne marche pas encore ou les simplifications faites]
 
----
-
-## Exécution des tests
-
-```bash
-# Tests unitaires + injection de pannes (Scénarios 1 et 2)
-pytest test_tourism_failures.py -v
-
-# Tests de sécurité (allow-list, CriticAgent)
-pytest test_security.py -v
-
-# Tests de concurrence (3 runs parallèles, isolation des caches DP)
-pytest test_concurrency.py -v
-
-# Tous les tests en une seule commande
-pytest test_tourism_failures.py test_security.py test_concurrency.py -v
-```
-
----
-
-## Comparaison empirique BT vs DP
-
-```bash
-# Lance la comparaison sur 5 tâches avec seeds fixes
-# Affiche le tableau latence / branches / cache hits
-# Sauvegarde le rapport dans logs/compare_bt_dp_report.json
-python compare_bt_dp.py
-```
-
----
-
-## Replay d'un scénario démo (ligne de commande)
-
-```bash
-# Scénario 1 : KPIs hôteliers depuis CSV (avec DP)
-python orchestrator_main.py
-
-# Ou directement via Python
-python - <<'EOF'
-from orchestrator.orchestrator import Orchestrator
-
-orch = Orchestrator(use_dp=True, max_steps=10)
-result = orch.run(
-    objective={'required_data': ['hotels'], 'kpis': ['taux_occupation_moyen', 'revpar_moyen']},
-    task_name="demo_scenario1"
-)
-print("Succès :", result['success'])
-print("Run ID :", result['run_id'])
-print("Plan   :", [a['tool'] for a in result['plan']])
-EOF
-```
-
----
-
-## Structure du projet
-
-```
-Groupe_X_Projet_DS2/
-├── orchestrator/
-│   ├── __init__.py
-│   ├── orchestrator.py       # Boucle Plan→Act→Observe→Critique
-│   ├── executor.py           # Validation schéma + exécution outils
-│   ├── critic.py             # Évaluation objectifs + sécurité
-│   └── run_manager.py        # run_id UUID, journal JSON, structlog
-├── tourism_tools.py           # ReadTourismDataTool, MockTourismAPITool (tenacity), ComputeKPIsTool
-├── tourism_planner.py         # BacktrackingPlanner + DPPlanner (cache MD5)
-├── tourism_dashboard.py       # GUI Streamlit principale
-├── schemas.py                 # Schémas JSON pour validation I/O
-├── compare_bt_dp.py           # Comparaison empirique BT vs DP (Section 4.4)
-├── test_tourism_failures.py   # Tests unitaires + injection de pannes
-├── test_security.py           # Tests sécurité (allow-list, Critic)
-├── test_concurrency.py        # Tests concurrence + isolation caches DP
-├── orchestrator_main.py       # Script démo ligne de commande
-├── hotels_tunisie.csv         # Données synthétiques hôtels (10 établissements)
-├── arrivees_mensuelles.csv    # Données arrivées touristiques par mois
-├── indicateurs_saisonniers.csv# Indicateurs saisonniers
-├── docs/
-│   ├── architecture.md        # Diagramme ASCII + rôles agents
-│   ├── bt_dp_design.md        # État BT, pruning, clé DP, comparaison
-│   └── threat_model.md        # Risques et contrôles de sécurité
-├── logs/                      # Journaux JSON par run (run_<id>.json)
-├── requirements.txt
-└── README.md                  # Ce fichier
-```
-
----
-
-## Paramètres de reproductibilité
-
-| Paramètre | Valeur |
-|-----------|--------|
-| `max_steps` (tests) | 5 |
-| `max_steps` (orchestrateur) | 10 |
-| Clé de cache DP | MD5 sur `(acquired_sorted, computed_sorted, required_sorted, kpis_sorted)` |
-| Composante aléatoire | Aucune (entièrement déterministe) |
-| Données | Synthétiques, incluses dans le dépôt |
-| API | Mock locale (pas de clé externe, pas d'appel réseau) |
-| Python | 3.11+ |
-
----
-
-## Limitations connues
-
-- L'API est un mock local ; aucun appel réseau réel n'est effectué.
-- La GUI utilise `st.rerun` (polling) pour les mises à jour ; pas de WebSocket.
-- Le cache DP est en mémoire et réinitialisé à chaque instance de DPPlanner.
-- Les logs sont en JSON (un fichier par run) ; une base SQLite améliorerait les requêtes.
-- Le Scénario 3 (retrieval sur corpus réglementaire) n'est pas implémenté (optionnel).
+## Auteure
+Ghada Kaabi — ISG Tunis
+Ma contribution : [À COMPLÉTER : ta part du travail dans le groupe de 4]
