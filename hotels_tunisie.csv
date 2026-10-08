@@ -1,0 +1,11 @@
+gouvernorat,hotel_id,etoiles,capacite_lits,taux_occupation_2024,prix_moyen_nuit_tnd,revenu_chambre_journalier
+Tunis,001,5,250,78.5,450,352.5
+Nabeul,002,4,180,82.3,320,263.4
+Sousse,003,5,320,85.2,380,323.7
+Hammamet,004,4,200,79.8,310,247.4
+Djerba,005,5,280,87.1,420,365.8
+Monastir,006,3,150,65.4,180,117.7
+Tozeur,007,4,120,71.2,290,206.5
+Tabarka,008,3,90,58.3,160,93.3
+Mahdia,009,4,140,73.5,270,198.5
+Bizerte,010,3,100,62.1,190,118.0

@@ -1,0 +1,28 @@
+# ============================================
+# requirements.txt — Dépendances du projet
+# ============================================
+# Installer avec : pip install -r requirements.txt
+# Python 3.11+ requis (Section 12.1 de l'énoncé)
+# ============================================
+
+# ─── GUI (Section 12.4 — obligatoire) ───
+streamlit>=1.25.0           # Interface web principale
+plotly>=5.14.0              # Graphiques interactifs dans la GUI
+
+# ─── Données (Section 12.5 — optionnel mais utilisé) ───
+pandas>=2.0.0               # Lecture CSV et manipulation des DataFrames
+
+# ─── Tests (Section 12.3 — obligatoire) ───
+pytest>=7.0.0               # Framework de tests unitaires
+
+# ─── Validation schémas (Section 12.3 — obligatoire) ───
+jsonschema>=4.0.0           # Validation entrée/sortie des outils (Section 5.2)
+
+# ─── Retry borné (Section 12.3 — obligatoire) ───
+tenacity>=8.2.0             # Retry avec stop_after_attempt + wait_fixed (Section 5.3)
+
+# ─── Logs structurés JSON (Section 12.3 — obligatoire) ───
+structlog>=23.1.0           # Logs JSON structurés pour audit (Section 8)
+
+# ─── HTTP client avec timeout (Section 12.3 — obligatoire) ───
+httpx>=0.24.0               # Client HTTP avec timeout explicite + allow-list
