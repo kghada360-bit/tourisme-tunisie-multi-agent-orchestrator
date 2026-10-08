@@ -1,0 +1,83 @@
+[
+  {
+    "event_type": "run_start",
+    "run_id": "682ffd12",
+    "task_name": null,
+    "timestamp": "2026-05-05T13:58:11.095234"
+  },
+  {
+    "event_type": "step",
+    "phase": "plan",
+    "action": "Generating plan",
+    "status": "started",
+    "details": {},
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.096235"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing mock_api",
+    "status": "started",
+    "details": {},
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.098295"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed mock_api",
+    "status": "failed",
+    "details": {},
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.099233"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing mock_api",
+    "status": "started",
+    "details": {},
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.100327"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed mock_api",
+    "status": "failed",
+    "details": {},
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.101232"
+  },
+  {
+    "event_type": "step",
+    "phase": "critique",
+    "action": "Evaluating state",
+    "status": "started",
+    "details": {},
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.102290"
+  },
+  {
+    "event_type": "step",
+    "phase": "critique",
+    "action": "Evaluation complete",
+    "status": "success",
+    "details": {
+      "goal_achieved": false,
+      "should_continue": true,
+      "issues": [],
+      "steps_count": 0
+    },
+    "run_id": "682ffd12",
+    "timestamp": "2026-05-05T13:58:11.103336"
+  },
+  {
+    "event_type": "run_end",
+    "run_id": "682ffd12",
+    "status": "failed",
+    "error": null,
+    "timestamp": "2026-05-05T13:58:11.103336"
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "event_type": "run_start",
+    "run_id": "cc14cf37",
+    "task_name": null,
+    "timestamp": "2026-05-05T14:02:01.461232"
+  },
+  {
+    "event_type": "step",
+    "phase": "plan",
+    "action": "Generating plan",
+    "status": "started",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.462230"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing read_hotels",
+    "status": "started",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.463230"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed read_hotels",
+    "status": "success",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.470415"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing compute_kpis",
+    "status": "started",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.471416"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed compute_kpis",
+    "status": "success",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.475415"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing read_hotels",
+    "status": "started",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.476415"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed read_hotels",
+    "status": "success",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.485924"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing compute_kpis",
+    "status": "started",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.486927"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed compute_kpis",
+    "status": "success",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.489933"
+  },
+  {
+    "event_type": "step",
+    "phase": "critique",
+    "action": "Evaluating state",
+    "status": "started",
+    "details": {},
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.489933"
+  },
+  {
+    "event_type": "step",
+    "phase": "critique",
+    "action": "Evaluation complete",
+    "status": "success",
+    "details": {
+      "goal_achieved": true,
+      "should_continue": false,
+      "issues": [],
+      "steps_count": 4
+    },
+    "run_id": "cc14cf37",
+    "timestamp": "2026-05-05T14:02:01.490924"
+  },
+  {
+    "event_type": "run_end",
+    "run_id": "cc14cf37",
+    "status": "success",
+    "error": null,
+    "timestamp": "2026-05-05T14:02:01.490924"
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "event_type": "run_start",
+    "run_id": "da8208db",
+    "task_name": null,
+    "timestamp": "2026-05-05T13:37:28.024863"
+  },
+  {
+    "event_type": "step",
+    "phase": "plan",
+    "action": "Generating plan",
+    "status": "started",
+    "details": {},
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.034304"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing mock_api",
+    "status": "started",
+    "details": {},
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.034304"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed mock_api",
+    "status": "failed",
+    "details": {},
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.037708"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executing mock_api",
+    "status": "started",
+    "details": {},
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.038574"
+  },
+  {
+    "event_type": "step",
+    "phase": "act",
+    "action": "Executed mock_api",
+    "status": "failed",
+    "details": {},
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.038574"
+  },
+  {
+    "event_type": "step",
+    "phase": "critique",
+    "action": "Evaluating state",
+    "status": "started",
+    "details": {},
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.038574"
+  },
+  {
+    "event_type": "step",
+    "phase": "critique",
+    "action": "Evaluation complete",
+    "status": "success",
+    "details": {
+      "goal_achieved": false,
+      "should_continue": true,
+      "issues": [],
+      "steps_count": 0
+    },
+    "run_id": "da8208db",
+    "timestamp": "2026-05-05T13:37:28.049190"
+  },
+  {
+    "event_type": "run_end",
+    "run_id": "da8208db",
+    "status": "failed",
+    "error": null,
+    "timestamp": "2026-05-05T13:37:28.050572"
+  }
+]
